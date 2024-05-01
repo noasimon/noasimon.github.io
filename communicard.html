@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <title>CommuniCard</title>
+    <link rel="stylesheet" type="text/css" href="sytle.css">
+    <!-- <script>
+        function navigateTo(screenId) {
+            // Hide all screens
+            var screens = document.getElementsByClassName('screen');
+            for (var i = 0; i < screens.length; i++) {
+                screens[i].style.display = 'none';
+            }
+            // Show the requested screen
+            document.getElementById(screenId).style.display = 'block';
+        }
+    </script> -->
+</head>
+<body>
+    <!-- <div id="screen1_en" class="screen" lang="en" style="display: none;">
+	<h>Welcome to CommuniCard!</h>
+        <p>Cards for people with communication disabilities</p>
+	<p>This card is to help YOU communicate more easily.<br> You can create it here for free.</p>
+	<p>CommuniCard is an interactive platform that creates a personalized card introducing the person with a communication disability and explaining how to better communicate with them. We believe that assisted conversation promotes participation.</p>
+        <button onclick="navigateTo('screen2_en')">Start Creating</button>
+    </div>
+    <div id="screen2_en" class="screen" style="display: none;">
+        <p>Let’s start! <br>In the next stages we will ask you to fill in the details for your personalized card.</p>
+        <button onclick="navigateTo('screen1_en')">Go Back</button>
+        <button onclick="navigateTo('screen3_en')">Continue</button>
+    </div>
+    <div id="screen3_en" class="screen" style="display: none;">
+	<h>Before we start – note to users:</h>
+        <p>If you are creating the card for yourself – press continue!</p>
+	<p>If you are assisting someone else make their card please read the following note:</p>
+	<p>You have an important role in enabling the person you are assisting control the content and design of their card.<br>- We suggest presenting the options one by one and giving sufficient reaction time, to support the person in making their choice.<br>- Once the preview of the card is ready, present it to the person and allow them to request changes before finalizing the card.</p>
+        <button onclick="navigateTo('screen2_en')">Go Back</button>
+        <button onclick="navigateTo('aboutMeScreen_en')">Continue</button>
+    </div>
+    <div id="aboutMeScreen_en" class="screen" style="display: none;">
+        <h1>About Me</h1>
+        <p>I want people to know about me…</p>
+
+        <input type="checkbox" id="nameCheckbox">
+        <label for="nameCheckbox">My name:</label>
+        <input type="text" id="nameInput" disabled><br>
+
+        <input type="checkbox" id="moreAboutMeCheckbox">
+        <label for="moreAboutMeCheckbox">More about me (profession/hobby/family):</label>
+        <input type="text" id="moreAboutMeInput" disabled><br>
+
+        <input type="checkbox" id="nothingAboutMeCheckbox">
+        <label for="nothingAboutMeCheckbox">Nothing</label><br>
+
+        <button onclick="navigateTo('screen3_en')">Go Back</button>
+        <button onclick="navigateTo('whatHappenedScreen_en')">Continue</button>
+    </div>
+    <div id="whatHappenedScreen_en" class="screen" style="display: none;">
+        <h1>What happened to me?</h1>
+	<input type="checkbox" id="strokeCheckbox">
+	<label for="strokeCheckbox">I had a stroke</label><br>
+
+        <input type="checkbox" id="accidentCheckbox">
+        <label for="accidentCheckbox">I was in an accident</label><br>
+
+	<input type="checkbox" id="brainInjuryCheckbox">
+        <label for="brainInjuryCheckbox">I had a brain injury</label><br>
+
+	<input type="checkbox" id="brainSurgeryCheckbox">
+        <label for="brainSurgeryCheckbox">I had brain surgery</label><br>
+
+	<input type="checkbox" id="brainTumorCheckbox">
+        <label for="brainTumorCheckbox">I had a brain tumor</label><br>
+
+	<input type="checkbox" id="palsyCheckbox">
+        <label for="palsyCheckbox">I have Cerebral Palsy</label><br>
+
+	<input type="checkbox" id="autismCheckbox">
+        <label for="autismCheckbox">I’m on the autistic spectrum</label><br>
+
+	<input type="checkbox" id="hearingCheckbox">
+        <label for="hearingCheckbox">I have a hearing impairment</label><br>
+
+	<input type="checkbox" id="syndromeCheckbox">
+        <label for="syndromeCheckbox">I was born with a syndrome</label><br>
+
+	<input type="checkbox" id="aphasiaCheckbox">
+        <label for="aphasiaCheckbox">I have Aphasia</label><br>
+
+	<input type="checkbox" id="elseCheckbox">
+        <label for="elseCheckbox">Something else: </label><br>
+        <input type="text" id="elseInput" disabled><br>
+
+        <input type="checkbox" id="nothingHappenedCheckbox">
+        <label for="nothingHappenedCheckbox">Nothing</label><br>
+
+        <button onclick="navigateTo('aboutMeScreen_en')">Go Back</button>
+        <button onclick="navigateTo('challengesScreen_en')">Continue</button>
+    </div>
+    <div id="challengesScreen_en" class="screen" style="display: none;">
+        <h1>My Challenges</h1>
+	<p>It's difficult to...</p>
+	<input type="checkbox" id="speakCheckbox">
+	<label for="speakCheckbox">Speak</label><br>
+
+    <input type="checkbox" id="findWordsCheckbox">
+        <label for="findWordsCheckbox">Find the words</label><br>
+
+	<input type="checkbox" id="wrongWordsCheckbox">
+        <label for="wrongWordsCheckbox">Sometimes the words come out wrong</label><br>
+
+	<input type="checkbox" id="understandCheckbox">
+        <label for="understandCheckbox">Understand language</label><br>
+
+	<input type="checkbox" id="followCheckbox">
+        <label for="followCheckbox">Follow the conversation</label><br>
+
+	<input type="checkbox" id="hearCheckbox">
+        <label for="hearCheckbox">Hear</label><br>
+
+	<input type="checkbox" id="communicateCheckbox">
+        <label for="communicateCheckbox">Communicate</label><br>
+
+	<input type="checkbox" id="writeCheckbox">
+        <label for="writeCheckbox">Write</label><br>
+
+	<input type="checkbox" id="readCheckbox">
+        <label for="readCheckbox">Read</label><br>
+
+	<input type="checkbox" id="elseDifficultCheckbox">
+        <label for="elseDifficultCheckbox">Something else: </label><br>
+        <input type="text" id="elseDifficultInput" disabled><br>
+
+        <button onclick="navigateTo('whatHappenedScreen_en')">Go Back</button>
+        <button onclick="navigateTo('helpScreen_en')">Continue</button>
+    </div>
+    <div id="helpScreen_en" class="screen" style="display: none;">
+        <h1>Communication tips</h1>
+	<p>What helps?</p>
+	<input type="checkbox" id="patientCheckbox">
+	<label for="patientCheckbox">Be patient</label><br>
+
+    <input type="checkbox" id="slowCheckbox">
+        <label for="slowCheckbox">Speak slowly</label><br>
+
+	<input type="checkbox" id="shortCheckbox">
+        <label for="shortCheckbox">Use short sentences</label><br>
+
+	<input type="checkbox" id="stopCheckbox">
+        <label for="stopCheckbox">Stop to check that we understand each other</label><br>
+
+	<input type="checkbox" id="yesNoCheckbox">
+        <label for="yesNoCheckbox">Ask yes/no questions or give me options to choose from</label><br>
+
+	<input type="checkbox" id="handCheckbox">
+        <label for="handCheckbox">Use hand gestures</label><br>
+
+	<input type="checkbox" id="aidCheckbox">
+        <label for="aidCheckbox">Refer to my communication aid</label><br>
+
+	<input type="checkbox" id="writeKeyCheckbox">
+        <label for="writeKeyCheckbox">Write down key words</label><br>
+
+	<input type="checkbox" id="elseHelpCheckbox">
+        <label for="elseHelpCheckbox">Something else: </label><br>
+        <input type="text" id="elseHelpInput" disabled><br>
+
+        <button onclick="navigateTo('challengesScreen_en')">Go Back</button>
+        <button onclick="navigateTo('nextScreen_en')">Continue</button>
+    </div>
+    <div id="nextScreen_en" class="screen" style="display: none;">
+        <div id="businessCard">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <p id="nextScreenText"></p> 
+        </div>
+        <button onclick="exportToPdf()">Export to PDF</button>
+        <button onclick="navigateTo('helpScreen_en')">Go Back</button>
+    </div> -->
+    
+    <div id="screen1_he" class="screen" lang="he" dir="rtl">
+        <h>ברוכים הבאים ל CommuniCard!</h>
+            <p>כרטיסים לאנשים עם לקויות בתקשורת</p>
+        <p>כאן ניתן ליצור בחינם<br> כרטיס שעוזר לך לשפר את השיחה</p>
+        <p>CommuniCard היא פלטפורמה דיגיטלית ליצירת כרטיס אישי שמציג את האדם עם הלקות בתקשורת ומסביר כיצד לנהל שיחה באופן יעיל יותר.</p>
+        <p>CommuniCard נוצרה מתוך אמונה ששיחה מתווכת ומותאמת מקדמת השתתפות בחברה ובקהילה. </p>
+            <button onclick="navigateTo('screen2_he')">בואו נתחיל!</button>
+        </div>
+        <div id="screen2_he" class="screen" lang="he" dir="rtl" style="display: none;">
+            <p>בואו נתחיל! <br>בשלבים הבאים נבקש ממך למלא פרטים שיופיעו בכרטיס האישי שלך.</p>
+            <p>הערה למסייעים: 
+                אם אתם מסייעים לאדם אחר להכין את הכרטיס יש לכם תפקיד חשוב: לאפשר לאדם שאתם מלווים לשלוט בתוכן ובעיצוב של הכרטיס האישי!<br>
+                - ההמלצה שלנו היא לשאול את השאלה המנחה, להציג את האפשרויות הרלוונטיות אחת אחת ולתת זמן תגובה מספק. <br>
+                - כאשר התצוגה המקדימה של הכרטיס מוכנה, ההמלצה שלנו היא להציג אותה לאדם ולאפשר לו/ה לבקש שינויים ותיקונים. 
+                </p>
+                <button onclick="navigateTo('screen1_he')">לחזור אחורה</button>
+                <button onclick="navigateTo('aboutMeScreen_he')">להמשיך</button>
+        </div>
+        <div id="aboutMeScreen_he" class="screen" lang="he" dir="rtl" style="display: none;">
+            <h1>מי אני?</h1>
+            <p>(אפשר לשאול: מה את/ה רוצה לספר על עצמך?)</p>
+    
+            <input type="checkbox" id="nameCheckboxHe">
+            <label for="nameCheckboxHe">השם שלי:</label>
+            <input type="text" id="nameInputHe" disabled><br>
+    
+            <input type="checkbox" id="moreAboutMeCheckboxHe">
+            <label for="moreAboutMeCheckboxHe">עוד קצת עלי (מקצוע/תחביב/משפחה):</label>
+            <input type="text" id="moreAboutMeInputHe" disabled><br>
+    
+            <input type="checkbox" id="nothingAboutMeCheckboxHe">
+            <label for="nothingAboutMeCheckboxHe">כלום</label><br>
+    
+            <button onclick="navigateTo('screen2_he')">לחזור אחורה</button>
+            <button onclick="navigateTo('whatHappenedScreen_he')">להמשיך</button>
+        </div>
+        <div id="whatHappenedScreen_he" class="screen" lang="he" dir="rtl" style="display: none;">
+            <h1>מה קרה לי?</h1>
+            <p>(אפשר לשאול: מה את/ה רוצה שידעו על הפגיעה שלך?)</p>
+        <input type="checkbox" id="strokeCheckboxHe">
+        <label for="strokeCheckboxHe">שבץ מוחי</label><br>
+    
+            <input type="checkbox" id="accidentCheckboxHe">
+            <label for="accidentCheckboxHe">תאונת דרכים</label><br>
+    
+        <input type="checkbox" id="brainInjuryCheckboxHe">
+            <label for="brainInjuryCheckboxHe">פגיעת ראש</label><br>
+    
+        <input type="checkbox" id="brainSurgeryCheckboxHe">
+            <label for="brainSurgeryCheckboxHe">ניתוח</label><br>
+    
+        <input type="checkbox" id="brainTumorCheckboxHe">
+            <label for="brainTumorCheckboxHe">גידול במוח</label><br>
+    
+        <input type="checkbox" id="palsyCheckboxHe">
+            <label for="palsyCheckboxHe">שיתוק מוחין (CP)</label><br>
+    
+        <input type="checkbox" id="autismCheckboxHe">
+            <label for="autismCheckboxHe">אני על הספקטרום האוטיסטי</label><br>
+    
+        <input type="checkbox" id="hearingCheckboxHe">
+            <label for="hearingCheckboxHe">לקות שמיעה</label><br>
+    
+        <input type="checkbox" id="syndromeCheckboxHe">
+            <label for="syndromeCheckboxHe">נולדתי עם תסמונת</label><br>
+    
+        <input type="checkbox" id="aphasiaCheckboxHe">
+            <label for="aphasiaCheckboxHe">אפזיה</label><br>
+    
+        <input type="checkbox" id="elseCheckboxHe">
+            <label for="elseCheckboxHe">משהו אחר: </label><br>
+            <input type="text" id="elseInputHe" disabled><br>
+    
+            <input type="checkbox" id="nothingHappenedCheckboxHe">
+            <label for="nothingHappenedCheckboxHe">כלום</label><br>
+    
+            <button onclick="navigateTo('aboutMeScreen_he')">לחזור אחורה</button>
+            <button onclick="navigateTo('challengesScreen_he')">להמשיך</button>
+        </div>
+        <div id="challengesScreen_he" class="screen" lang="he" dir="rtl" style="display: none;">
+            <h1>קשה לי… </h1>
+        <p>(אפשר לשאול: מה הכי קשה לך בשיחה?)</p>
+        <input type="checkbox" id="speakCheckboxHe">
+        <label for="speakCheckboxHe">לדבר</label><br>
+    
+        <input type="checkbox" id="findWordsCheckboxHe">
+            <label for="findWordsCheckboxHe">למצוא את המילים</label><br>
+    
+        <input type="checkbox" id="wrongWordsCheckboxHe">
+            <label for="wrongWordsCheckboxHe">לפעמים יוצאות לי מילים לא מתאימות</label><br>
+    
+        <input type="checkbox" id="understandCheckboxHe">
+            <label for="understandCheckboxHe">להבין שפה</label><br>
+    
+        <input type="checkbox" id="followCheckboxHe">
+            <label for="followCheckboxHe">לעקוב אחרי השיחה</label><br>
+    
+        <input type="checkbox" id="hearCheckboxHe">
+            <label for="hearCheckboxHe">לשמוע</label><br>
+    
+        <input type="checkbox" id="communicateCheckboxHe">
+            <label for="communicateCheckboxHe">לתקשר</label><br>
+    
+        <input type="checkbox" id="writeCheckboxHe">
+            <label for="writeCheckboxHe">לכתוב</label><br>
+    
+        <input type="checkbox" id="readCheckboxHe">
+            <label for="readCheckboxHe">לקרוא</label><br>
+    
+        <input type="checkbox" id="elseDifficultCheckboxHe">
+            <label for="elseDifficultCheckboxHe">משהו אחר: </label><br>
+            <input type="text" id="elseDifficultInputHe" disabled><br>
+    
+            <button onclick="navigateTo('whatHappenedScreen_he')">לחזור אחורה</button>
+            <button onclick="navigateTo('helpScreen_he')">להמשיך</button>
+        </div>
+        <div id="helpScreen_he" class="screen" lang="he" dir="rtl" style="display: none;">
+            <h1>טיפים לתקשורת איתי</h1>
+        <p>(אפשר לשאול: מה עוזר לך בשיחה?)</p>
+        <input type="checkbox" id="patientCheckboxHe">
+        <label for="patientCheckboxHe">סבלנות</label><br>
+    
+        <input type="checkbox" id="slowCheckboxHe">
+            <label for="slowCheckboxHe">דברו לאט</label><br>
+    
+        <input type="checkbox" id="shortCheckboxHe">
+            <label for="shortCheckboxHe">דברו במשפטים קצרים</label><br>
+    
+        <input type="checkbox" id="stopCheckboxHe">
+            <label for="stopCheckboxHe">עצרו לשאול אם הבנתי ותודאו שהבנתם אותי</label><br>
+    
+        <input type="checkbox" id="yesNoCheckboxHe">
+            <label for="yesNoCheckboxHe">שאלו שאלות כן/לא, או תנו לי לבחור מבין אפשרויות</label><br>
+    
+        <input type="checkbox" id="handCheckboxHe">
+            <label for="handCheckboxHe">דברו עם הידיים</label><br>
+    
+        <input type="checkbox" id="aidCheckboxHe">
+            <label for="aidCheckboxHe">פנו ללוח התקשורת שלי</label><br>
+    
+        <input type="checkbox" id="writeKeyCheckboxHe">
+            <label for="writeKeyCheckboxHe">כתבו מילות מפתח</label><br>
+    
+        <input type="checkbox" id="elseHelpCheckboxHe">
+            <label for="elseHelpCheckboxHe">משהו אחר: </label><br>
+            <input type="text" id="elseHelpInputHe" disabled><br>
+    
+            <button onclick="navigateTo('challengesScreen_he')">לחזור אחורה</button>
+            <button onclick="navigateTo('nextScreen_he')">להמשיך</button>
+        </div>
+        <div id="nextScreen_he" class="screen" lang="he" dir="rtl" style="display: none;">
+            <div id="businessCard" lang="he" dir="rtl" style="text-align: right;">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <p id="nextScreenTextHe" style="margin-right: 15px;"></p> 
+            </div>
+            <button onclick="exportToPdf()">מצוין! אפשר להמשיך להורדה/הדפסה של הכרטיס</button>
+            <button onclick="navigateTo('helpScreen_he')">לחזור אחורה</button>
+        </div>
+        
+    <script>
+        // document.getElementById('nameCheckbox').addEventListener('change', function() {
+        //     document.getElementById('nameInput').disabled = !this.checked;
+        // });
+
+        // document.getElementById('moreAboutMeCheckbox').addEventListener('change', function() {
+        //     document.getElementById('moreAboutMeInput').disabled = !this.checked;
+        // });
+
+        // document.getElementById('nothingAboutMeCheckbox').addEventListener('change', function() {
+        //     document.getElementById('nameCheckbox').disabled = this.checked;
+        //     document.getElementById('moreAboutMeCheckbox').disabled = this.checked;
+        // });
+
+	    // document.getElementById('elseCheckbox').addEventListener('change', function() {
+        //     document.getElementById('elseInput').disabled = !this.checked;
+        // });
+
+	    // document.getElementById('nothingHappenedCheckbox').addEventListener('change', function() {
+        //     document.getElementById('strokeCheckbox').disabled = this.checked;
+        //     document.getElementById('accidentCheckbox').disabled = this.checked;
+        //     document.getElementById('brainInjuryCheckbox').disabled = this.checked;
+        //     document.getElementById('brainSurgeryCheckbox').disabled = this.checked;
+        //     document.getElementById('brainTumorCheckbox').disabled = this.checked;
+        //     document.getElementById('palsyCheckbox').disabled = this.checked;
+        //     document.getElementById('autismCheckbox').disabled = this.checked;
+        //     document.getElementById('hearingCheckbox').disabled = this.checked;
+        //     document.getElementById('syndromeCheckbox').disabled = this.checked;
+        //     document.getElementById('aphasiaCheckbox').disabled = this.checked;
+        //     document.getElementById('elseCheckbox').disabled = this.checked;
+        // });
+	
+	    // document.getElementById('elseDifficultCheckbox').addEventListener('change', function() {
+        //     document.getElementById('elseDifficultInput').disabled = !this.checked;
+        // });
+        // document.getElementById('elseHelpCheckbox').addEventListener('change', function() {
+        //     document.getElementById('elseHelpInput').disabled = !this.checked;
+        // });
+    
+        document.getElementById('nameCheckboxHe').addEventListener('change', function() {
+            document.getElementById('nameInputHe').disabled = !this.checked;
+        });
+
+        document.getElementById('moreAboutMeCheckboxHe').addEventListener('change', function() {
+            document.getElementById('moreAboutMeInputHe').disabled = !this.checked;
+        });
+
+        document.getElementById('nothingAboutMeCheckboxHe').addEventListener('change', function() {
+            document.getElementById('nameCheckboxHe').disabled = this.checked;
+            document.getElementById('moreAboutMeCheckboxHe').disabled = this.checked;
+        });
+
+	    document.getElementById('elseCheckboxHe').addEventListener('change', function() {
+            document.getElementById('elseInputHe').disabled = !this.checked;
+        });
+
+	    document.getElementById('nothingHappenedCheckboxHe').addEventListener('change', function() {
+            document.getElementById('strokeCheckboxHe').disabled = this.checked;
+            document.getElementById('accidentCheckboxHe').disabled = this.checked;
+            document.getElementById('brainInjuryCheckboxHe').disabled = this.checked;
+            document.getElementById('brainSurgeryCheckboxHe').disabled = this.checked;
+            document.getElementById('brainTumorCheckboxHe').disabled = this.checked;
+            document.getElementById('palsyCheckboxHe').disabled = this.checked;
+            document.getElementById('autismCheckboxHe').disabled = this.checked;
+            document.getElementById('hearingCheckboxHe').disabled = this.checked;
+            document.getElementById('syndromeCheckboxHe').disabled = this.checked;
+            document.getElementById('aphasiaCheckboxHe').disabled = this.checked;
+            document.getElementById('elseCheckboxHe').disabled = this.checked;
+        });
+	
+	    document.getElementById('elseDifficultCheckboxHe').addEventListener('change', function() {
+            document.getElementById('elseDifficultInputHe').disabled = !this.checked;
+        });
+        document.getElementById('elseHelpCheckboxHe').addEventListener('change', function() {
+            document.getElementById('elseHelpInputHe').disabled = !this.checked;
+        });
+    
+
+        function navigateTo(screenId) {
+        //     if (screenId === 'nextScreen_en') {
+        //         var text = '';
+        //         var countHappened = 0;
+        //         var countChal = 0;
+        //         var countHelp = 0;
+        //         if (document.getElementById('nameCheckbox').checked) {
+        //             text += 'My name is ' + document.getElementById('nameInput').value + ', ';
+        //         }
+        //         if (document.getElementById('moreAboutMeCheckbox').checked) {
+        //             text += document.getElementById('moreAboutMeInput').value + '.';
+        //         }
+        // if (document.getElementById('accidentCheckbox').checked) {
+        //             text += ' I was in an accident';
+        //             countHappened += 1;
+        //         }
+		// if (document.getElementById('strokeCheckbox').checked) {
+        //             if (countHappened > 0){
+        //                 text += ' and'
+        //             }
+        //             text += ' I had a stroke';
+        //             countHappened += 1;
+        //         }
+		// if (document.getElementById('brainInjuryCheckbox').checked) {
+        //             if (countHappened > 0){
+        //                 text += ' and'
+        //             }
+        //             if (!document.getElementById('strokeCheckbox').checked) {
+        //                 text += ' I had'
+        //             }
+        //             text += ' a brain injury';
+        //             countHappened += 1;
+        //         }
+		// if (document.getElementById('brainSurgeryCheckbox').checked) {
+        //             if (countHappened > 0){
+        //                 text += ' and'
+        //             }
+        //             if (!document.getElementById('strokeCheckbox').checked && !document.getElementById('brainInjuryCheckbox').checked) {
+        //                 text += ' I had'
+        //             }
+        //             text += ' a brain surgery';
+        //             countHappened += 1;
+        //         }
+		// if (document.getElementById('brainTumorCheckbox').checked) {
+        //             if (countHappened > 0){
+        //                 text += ' and'
+        //             }
+        //             if (!document.getElementById('strokeCheckbox').checked && !document.getElementById('brainInjuryCheckbox').checked && !document.getElementById('brainSurgeryCheckbox').checked) {
+        //                 text += ' I had'
+        //             }    
+        //             text += ' a brain tumor';
+        //             countHappened += 1;
+        //         }
+		// if (document.getElementById('autismCheckbox').checked) {
+        //             if (countHappened > 0){
+        //                 text += ' and'
+        //             }    
+        //             text += ' I’m on the autistic spectrum';
+        //             countHappened += 1;
+        //         }
+		// if (document.getElementById('palsyCheckbox').checked) {
+        //             if (countHappened > 0){
+        //                 text += ' and'
+        //             }
+        //             text += ' I have Cerebral Palsy';
+        //             countHappened += 1;
+        //         }
+		// if (document.getElementById('aphasiaCheckbox').checked) {
+        //             if (countHappened > 0){
+        //                 text += ' and'
+        //             }
+        //             if (!document.getElementById('palsyCheckbox').checked) {
+        //                 text += ' I have'
+        //             }
+        //             text += ' Aphasia';
+        //             countHappened += 1;
+        //         }
+		// if (document.getElementById('hearingCheckbox').checked) {
+        //             if (countHappened > 0){
+        //                 text += ' and'
+        //             }
+        //             if (!document.getElementById('palsyCheckbox').checked && !document.getElementById('aphasiaCheckbox').checked) {
+        //                 text += ' I have'
+        //             }
+        //             text += ' a hearing impairment';
+        //             countHappened += 1;
+        //         }
+		// if (document.getElementById('syndromeCheckbox').checked) {
+        //             if (countHappened > 0){
+        //                 text += ' and'
+        //             }
+        //             text += ' I was born with a syndrome';
+        //             countHappened += 1;
+        //         }
+		// if (document.getElementById('elseCheckbox').checked) {
+        //             if (countHappened > 0){
+        //                 text += ' and'
+        //             }
+        //             text += ' ' + document.getElementById('elseInput').value;
+        //             countHappened += 1;
+        //         }
+        //         text += '.';
+
+		// if (document.getElementById('wrongWordsCheckbox').checked) {
+        //             text += ' Sometimes the words come out wrong';
+        //         //     countChal += 1;
+        //         }
+        // if (document.getElementById('speakCheckbox').checked || document.getElementById('findWordsCheckbox').checked || 
+        //     document.getElementById('understandCheckbox').checked || document.getElementById('followCheckbox').checked || 
+        //     document.getElementById('hearCheckbox').checked || document.getElementById('communicateCheckbox').checked ||
+        //     document.getElementById('writeCheckbox').checked || document.getElementById('readCheckbox').checked || 
+        //     document.getElementById('elseDifficultCheckbox').checked){
+        //     if (document.getElementById('wrongWordsCheckbox').checked) {
+        //         text += ' and i';
+        //     }else{
+        //         text += ' I'
+        //     }
+		//     text +="t's difficult to ";
+		// }
+		// if (document.getElementById('speakCheckbox').checked) {
+        //             text += ' speak';
+        //             countChal += 1;
+        //         }
+		// if (document.getElementById('findWordsCheckbox').checked) {
+        //             if (countChal > 0){
+        //                 text += ' and'
+        //             }    
+        //             text += ' find the words';
+        //             countChal += 1;
+        //         }
+		// if (document.getElementById('understandCheckbox').checked) {
+        //             if (countChal > 0){
+        //                 text += ' and'
+        //             }
+        //             text += ' understand language';
+        //             countChal += 1;
+        //         }
+		// if (document.getElementById('followCheckbox').checked) {
+        //            if (countChal > 0){
+        //                 text += ' and'
+        //             }    
+        //             text += ' follow the conversation';
+        //             countChal += 1;
+        //         }
+		// if (document.getElementById('hearCheckbox').checked) {
+        //             if (countChal > 0){
+        //                 text += ' and'
+        //             }
+        //             text += ' hear';
+        //             countChal += 1;
+        //         }
+		// if (document.getElementById('communicateCheckbox').checked) {
+        //            if (countChal > 0){
+        //                 text += ' and'
+        //             }    
+        //             text += ' communicate';
+        //             countChal += 1;
+        //         }
+		// if (document.getElementById('writeCheckbox').checked) {
+        //            if (countChal > 0){
+        //                 text += ' and'
+        //             }    
+        //             text += ' write';
+        //             countChal += 1;
+        //         }
+		// if (document.getElementById('readCheckbox').checked) {
+        //            if (countChal > 0){
+        //                 text += ' and'
+        //             }
+        //             text += ' read';
+        //             countChal += 1;
+        //         }
+		// if (document.getElementById('elseDifficultCheckbox').checked) {
+        //            if (countChal > 0){
+        //                 text += ' and'
+        //             }
+        //             text += ' ' + document.getElementById('elseDifficultInput').value;
+        //             countChal += 1;
+        //         }
+        // text += ". Please";
+        // if (document.getElementById('patientCheckbox').checked) {
+        //             text += ' be patient';
+        //             countHelp += 1;
+        //         }
+		// if (document.getElementById('slowCheckbox').checked) {
+        //            if (countHelp > 0){
+        //                 text += ' and'
+        //             }    
+        //             text += ' speak slowly';
+        //             countHelp += 1;
+        //         }
+		// if (document.getElementById('shortCheckbox').checked) {
+        //             if (countHelp > 0){
+        //                 text += ' and'
+        //             }        
+        //             text += ' use short sentences';
+        //             countHelp += 1;
+        //         }
+		// if (document.getElementById('stopCheckbox').checked) {
+        //            if (countHelp > 0){
+        //                 text += ' and'
+        //             }    
+        //             text += ' stop to check that we understand each other';
+        //             countHelp += 1;
+        //         }
+		// if (document.getElementById('yesNoCheckbox').checked) {
+        //            if (countHelp > 0){
+        //                 text += ' and'
+        //             }
+        //             text += ' ask yes/no questions or give me options to choose from';
+        //             countHelp += 1;
+        //         }
+		// if (document.getElementById('handCheckbox').checked) {
+        //            if (countHelp > 0){
+        //                 text += ' and'
+        //             }
+        //             text += ' use hand gestures';
+        //             countHelp += 1;
+        //         }
+		// if (document.getElementById('aidCheckbox').checked) {
+        //            if (countHelp > 0){
+        //                 text += ' and'
+        //             }
+        //             text += ' refer to my communication aid';
+        //             countHelp += 1;
+        //         }
+		// if (document.getElementById('writeKeyCheckbox').checked) {
+        //            if (countHelp > 0){
+        //                 text += ' and'
+        //             }    
+        //             text += ' write down key words';
+        //             countHelp += 1;
+        //         }
+		// if (document.getElementById('elseHelpCheckbox').checked) {
+        //            if (countHelp > 0){
+        //                 text += ' and'
+        //             }
+        //             text += ' ' + document.getElementById('elseHelpInput').value;
+        //             countHelp += 1;
+        //         }
+		// text += '. Thank you!'
+
+        // document.getElementById('nextScreenText').textContent = text;
+        // } else 
+        if (screenId === 'nextScreen_he') {
+                var text = '';
+                var countHappened = 0;
+                var countChal = 0;
+                var countHelp = 0;
+                if (document.getElementById('nameCheckboxHe').checked) {
+                    text += 'שמי ' + document.getElementById('nameInputHe').value + ', ';
+                }
+                if (document.getElementById('moreAboutMeCheckboxHe').checked) {
+                    text += document.getElementById('moreAboutMeInputHe').value + '. ';
+                }
+        if (document.getElementById('accidentCheckboxHe').checked) {
+                    text += 'עברתי תאונת דרכים';
+                    countHappened += 1;
+                }
+		if (document.getElementById('strokeCheckboxHe').checked) {
+                    if (countHappened > 0){
+                        text += ' ו'
+                    }
+                    text += ' עברתי שבץ מוחי';
+                    countHappened += 1;
+                }
+		if (document.getElementById('brainInjuryCheckboxHe').checked) {
+                    if (countHappened > 0){
+                        text += ' ו'
+                    }
+                    if (!document.getElementById('strokeCheckboxHe').checked) {
+                        text += 'עברתי '
+                    }
+                    text += 'פגיעת ראש';
+                    countHappened += 1;
+                }
+		if (document.getElementById('brainSurgeryCheckboxHe').checked) {
+                    if (countHappened > 0){
+                        text += ' ו'
+                    }
+                    if (!document.getElementById('strokeCheckboxHe').checked && !document.getElementById('brainInjuryCheckboxHe').checked) {
+                        text += 'עברתי '
+                    }
+                    text += 'ניתוח';
+                    countHappened += 1;
+                }
+		if (document.getElementById('brainTumorCheckboxHe').checked) {
+                    if (countHappened > 0){
+                        text += ' ו'
+                    }
+                    if (!document.getElementById('strokeCheckboxHe').checked && !document.getElementById('brainInjuryCheckboxHe').checked && !document.getElementById('brainSurgeryCheckboxHe').checked) {
+                        text += 'היה לי '
+                    }    
+                    text += 'גידול במוח';
+                    countHappened += 1;
+                }
+		if (document.getElementById('autismCheckboxHe').checked) {
+                    if (countHappened > 0){
+                        text += ' ו'
+                    }    
+                    text += 'אני על הספקטרום האוטיסטי';
+                    countHappened += 1;
+                }
+		if (document.getElementById('palsyCheckboxHe').checked) {
+                    if (countHappened > 0){
+                        text += ' ו'
+                    }
+                    text += 'יש לי שיתוק מוחין (CP)';
+                    countHappened += 1;
+                }
+		if (document.getElementById('aphasiaCheckboxHe').checked) {
+                    if (countHappened > 0){
+                        text += ' ו'
+                    }
+                    if (!document.getElementById('palsyCheckboxHe').checked) {
+                        text += 'יש לי '
+                    }
+                    text += 'אפזיה';
+                    countHappened += 1;
+                }
+		if (document.getElementById('hearingCheckboxHe').checked) {
+                    if (countHappened > 0){
+                        text += ' ו'
+                    }
+                    if (!document.getElementById('palsyCheckboxHe').checked && !document.getElementById('aphasiaCheckboxHe').checked) {
+                        text += 'יש לי '
+                    }
+                    text += 'לקות שמיעה';
+                    countHappened += 1;
+                }
+		if (document.getElementById('syndromeCheckboxHe').checked) {
+                    if (countHappened > 0){
+                        text += ' ו'
+                    }
+                    text += 'נולדתי עם תסמונת';
+                    countHappened += 1;
+                }
+		if (document.getElementById('elseCheckboxHe').checked) {
+                    if (countHappened > 0){
+                        text += ' ו'
+                    }
+                    text += document.getElementById('elseInputHe').value;
+                    countHappened += 1;
+                }
+                text += '. ';
+
+		if (document.getElementById('wrongWordsCheckboxHe').checked) {
+                    text += ' לפעמים יוצאות לי מילים לא מתאימות';
+                //     countChal += 1;
+                }
+        if (document.getElementById('speakCheckboxHe').checked || document.getElementById('findWordsCheckboxHe').checked || 
+            document.getElementById('understandCheckboxHe').checked || document.getElementById('followCheckboxHe').checked || 
+            document.getElementById('hearCheckboxHe').checked || document.getElementById('communicateCheckboxHe').checked ||
+            document.getElementById('writeCheckboxHe').checked || document.getElementById('readCheckboxHe').checked || 
+            document.getElementById('elseDifficultCheckboxHe').checked){
+            if (document.getElementById('wrongWordsCheckboxHe').checked) {
+                text += ' ו';
+            }
+            // else{
+                // text += ' I'
+            // }
+		    text +="קשה לי ";
+		}
+		if (document.getElementById('speakCheckboxHe').checked) {
+                    text += ' לדבר';
+                    countChal += 1;
+                }
+		if (document.getElementById('findWordsCheckboxHe').checked) {
+                    if (countChal > 0){
+                        text += ' ו'
+                    }    
+                    text += 'למצוא את המילים';
+                    countChal += 1;
+                }
+		if (document.getElementById('understandCheckboxHe').checked) {
+                    if (countChal > 0){
+                        text += ' ו'
+                    }
+                    text += 'להבין שפה';
+                    countChal += 1;
+                }
+		if (document.getElementById('followCheckboxHe').checked) {
+                   if (countChal > 0){
+                        text += ' ו'
+                    }    
+                    text += 'לעקוב אחרי השיחה';
+                    countChal += 1;
+                }
+		if (document.getElementById('hearCheckboxHe').checked) {
+                    if (countChal > 0){
+                        text += ' ו'
+                    }
+                    text += 'לשמוע';
+                    countChal += 1;
+                }
+		if (document.getElementById('communicateCheckboxHe').checked) {
+                   if (countChal > 0){
+                        text += ' ו'
+                    }    
+                    text += 'לתקשר';
+                    countChal += 1;
+                }
+		if (document.getElementById('writeCheckboxHe').checked) {
+                   if (countChal > 0){
+                        text += ' ו'
+                    }    
+                    text += 'לכתוב';
+                    countChal += 1;
+                }
+		if (document.getElementById('readCheckboxHe').checked) {
+                   if (countChal > 0){
+                        text += ' ו'
+                    }
+                    text += 'לקרוא';
+                    countChal += 1;
+                }
+		if (document.getElementById('elseDifficultCheckboxHe').checked) {
+                   if (countChal > 0){
+                        text += ' ו'
+                    }
+                    text += document.getElementById('elseDifficultInputHe').value;
+                    countChal += 1;
+                }
+        text += ". אנא ";
+        if (document.getElementById('patientCheckboxHe').checked) {
+                    text += 'האזרו בסבלנות ותנו לי זמן';
+                    countHelp += 1;
+                }
+		if (document.getElementById('slowCheckboxHe').checked) {
+                   if (countHelp > 0){
+                        text += ' ו'
+                    }    
+                    text += 'דברו לאט';
+                    countHelp += 1;
+                }
+		if (document.getElementById('shortCheckboxHe').checked) {
+                    if (countHelp > 0){
+                        text += ' ו'
+                    }        
+                    text += 'דברו במשפטים קצרים';
+                    countHelp += 1;
+                }
+		if (document.getElementById('stopCheckboxHe').checked) {
+                   if (countHelp > 0){
+                        text += ' ו'
+                    }    
+                    text += 'עצרו לשאול אם הבנתי ותודאו שהבנתם אותי';
+                    countHelp += 1;
+                }
+		if (document.getElementById('yesNoCheckboxHe').checked) {
+                   if (countHelp > 0){
+                        text += ' ו'
+                    }
+                    text += 'שאלו שאלות כן/לא, או תנו לי לבחור מבין אפשרויות';
+                    countHelp += 1;
+                }
+		if (document.getElementById('handCheckboxHe').checked) {
+                   if (countHelp > 0){
+                        text += ' ו'
+                    }
+                    text += 'דברו עם הידיים';
+                    countHelp += 1;
+                }
+		if (document.getElementById('aidCheckboxHe').checked) {
+                   if (countHelp > 0){
+                        text += ' ו'
+                    }
+                    text += 'פנו ללוח התקשורת שלי';
+                    countHelp += 1;
+                }
+		if (document.getElementById('writeKeyCheckboxHe').checked) {
+                   if (countHelp > 0){
+                        text += ' ו'
+                    }    
+                    text += 'כתבו מילות מפתח';
+                    countHelp += 1;
+                }
+		if (document.getElementById('elseHelpCheckboxHe').checked) {
+                   if (countHelp > 0){
+                        text += ' ו'
+                    }
+                    text += document.getElementById('elseHelpInputHe').value;
+                    countHelp += 1;
+                }
+		text += '. תודה!'
+
+        document.getElementById('nextScreenTextHe').textContent = text;
+        }
+
+
+        // Hide all screens
+        var screens = document.getElementsByClassName('screen');
+        for (var i = 0; i < screens.length; i++) {
+            screens[i].style.display = 'none';
+        }
+        // Show the requested screen
+        document.getElementById(screenId).style.display = 'block';
+        }
+    </script>
+    <script src="script.js"></script>
+    <!-- Add more screens here -->
+</body>
+</html>
+	

@@ -1,0 +1,83 @@
+
+p {
+    font-size: 20px;
+  }
+h {
+    font-size: 24px;
+}
+label {
+    font-size: 20px;
+}
+body {
+
+        #businessCard {
+            border: 2px solid black;
+            width: 326px;
+            height: 192px;
+            padding-inline-start: 10px;
+            padding-right: 0;
+            padding-block-end: 0;
+        }
+        #businessCard::before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 14px;
+            /* left: 5px; */
+            right: 15px;
+            width: 30px;
+            border-top: 2px solid black;
+        }
+        
+        .line {
+            position: absolute;
+            height: 2px;
+            background-color: black;
+        }
+
+        .line:nth-child(2) {
+            position: absolute;
+            /* left: 5px; */
+            right: 15px;
+            top: 19px;
+            width: 20px;
+            background-color: black;
+        }
+
+        .line:nth-child(3) {
+            position: absolute;
+            /* left: 5px; */
+            right: 15px;
+            top: 24px;
+            width: 10px;
+            background-color: black;
+        }
+        #businessCard::after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 187px;
+            /* left: 323px; */
+            right: 323px;
+            width: 10px;
+            border-top: 2px solid black;
+        }
+        .line:nth-child(5) {
+            position: absolute;
+            top: 192px;
+            width: 20px;
+            /* left: 313px; */
+            right: 313px;
+            background-color: black;
+        }
+        
+        .line:nth-child(6) {
+            position: absolute;
+            top: 197px;
+            width: 30px;
+            /* left: 303px; */
+            right: 303px;
+            background-color: black;
+        }
+        
+    }
