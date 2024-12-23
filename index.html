@@ -227,7 +227,10 @@
         <input type="checkbox" id="strokeCheckboxHe">
         <label for="strokeCheckboxHe">שבץ מוחי</label><br>
         <br>
-            <input type="checkbox" id="accidentCheckboxHe">
+        <input type="checkbox" id="aphasiaCheckboxHe">
+            <label for="aphasiaCheckboxHe">אפזיה</label><br>
+            <br>
+        <input type="checkbox" id="accidentCheckboxHe">
             <label for="accidentCheckboxHe">תאונת דרכים</label><br>
             <br>
         <input type="checkbox" id="brainInjuryCheckboxHe">
@@ -250,9 +253,6 @@
             <br>
         <input type="checkbox" id="syndromeCheckboxHe">
             <label for="syndromeCheckboxHe">נולדתי עם תסמונת</label><br>
-            <br>
-        <input type="checkbox" id="aphasiaCheckboxHe">
-            <label for="aphasiaCheckboxHe">אפזיה</label><br>
             <br>
         <input type="checkbox" id="elseCheckboxHe">
             <label for="elseCheckboxHe">משהו אחר: </label><br>
@@ -672,246 +672,177 @@
         // } else 
         if (screenId === 'nextScreen_he') {
                 var text = '';
-                var countHappened = 0;
-                var countChal = 0;
-                var countHelp = 0;
                 if (document.getElementById('nameCheckboxHe').checked) {
                     text += 'שמי ' + document.getElementById('nameInputHe').value + ', ';
                 }
                 if (document.getElementById('moreAboutMeCheckboxHe').checked) {
                     text += document.getElementById('moreAboutMeInputHe').value + '. ';
                 }
+        let happenedItems = [];
+        let addedPrefix = false;
         if (document.getElementById('accidentCheckboxHe').checked) {
-                    text += 'עברתי תאונת דרכים';
-                    countHappened += 1;
+                    happenedItems.push('עברתי תאונת דרכים');
+                    addedPrefix = true;
                 }
 		if (document.getElementById('strokeCheckboxHe').checked) {
-                    if (countHappened > 0){
-                        text += ' ו'
-                    }
-                    text += ' עברתי שבץ מוחי';
-                    countHappened += 1;
+                    happenedItems.push(addedPrefix ? 'שבץ מוחי' : 'עברתי שבץ מוחי');
+                    addedPrefix = true;
+
                 }
 		if (document.getElementById('brainInjuryCheckboxHe').checked) {
-                    if (countHappened > 0){
-                        text += ' ו'
-                    }
-                    if (!document.getElementById('strokeCheckboxHe').checked) {
-                        text += 'עברתי '
-                    }
-                    text += 'פגיעת ראש';
-                    countHappened += 1;
+                    happenedItems.push(addedPrefix ? 'פגיעת ראש' : 'עברתי פגיעת ראש');
+                    addedPrefix = true;
                 }
 		if (document.getElementById('brainSurgeryCheckboxHe').checked) {
-                    if (countHappened > 0){
-                        text += ' ו'
-                    }
-                    if (!document.getElementById('strokeCheckboxHe').checked && !document.getElementById('brainInjuryCheckboxHe').checked) {
-                        text += 'עברתי '
-                    }
-                    text += 'ניתוח';
-                    countHappened += 1;
+                    happenedItems.push(addedPrefix ? 'ניתוח' : 'עברתי ניתוח');
+                    addedPrefix = true;
                 }
 		if (document.getElementById('brainTumorCheckboxHe').checked) {
-                    if (countHappened > 0){
-                        text += ' ו'
-                    }
-                    if (!document.getElementById('strokeCheckboxHe').checked && !document.getElementById('brainInjuryCheckboxHe').checked && !document.getElementById('brainSurgeryCheckboxHe').checked) {
-                        text += 'היה לי '
-                    }    
-                    text += 'גידול במוח';
-                    countHappened += 1;
+                    happenedItems.push(addedPrefix ? 'גידול במוח' : 'היה לי גידול במוח');
                 }
 		if (document.getElementById('autismCheckboxHe').checked) {
-                    if (countHappened > 0){
-                        text += ' ו'
-                    }    
-                    text += 'אני על הספקטרום האוטיסטי';
-                    countHappened += 1;
+                    happenedItems.push('אני על הספקטרום האוטיסטי');
                 }
 		if (document.getElementById('palsyCheckboxHe').checked) {
-                    if (countHappened > 0){
-                        text += ' ו'
-                    }
-                    text += 'יש לי שיתוק מוחין (CP)';
-                    countHappened += 1;
+                    happenedItems.push('יש לי שיתוק מוחין (CP)');
                 }
 		if (document.getElementById('aphasiaCheckboxHe').checked) {
-                    if (countHappened > 0){
-                        text += ' ו'
-                    }
-                    if (!document.getElementById('palsyCheckboxHe').checked) {
-                        text += 'יש לי '
-                    }
-                    text += 'אפזיה';
-                    countHappened += 1;
+                    let aphasiaText = document.getElementById('palsyCheckboxHe').checked ? 'אפזיה' : 'יש לי אפזיה';
+                    happenedItems.push(aphasiaText);
                 }
 		if (document.getElementById('hearingCheckboxHe').checked) {
-                    if (countHappened > 0){
-                        text += ' ו'
-                    }
-                    if (!document.getElementById('palsyCheckboxHe').checked && !document.getElementById('aphasiaCheckboxHe').checked) {
-                        text += 'יש לי '
-                    }
-                    text += 'לקות שמיעה';
-                    countHappened += 1;
+                    let hearingText = (document.getElementById('palsyCheckboxHe').checked || 
+                             document.getElementById('aphasiaCheckboxHe').checked) ? 
+                             'לקות שמיעה' : 'יש לי לקות שמיעה';
+                    happenedItems.push(hearingText);
                 }
 		if (document.getElementById('syndromeCheckboxHe').checked) {
-                    if (countHappened > 0){
-                        text += ' ו'
-                    }
-                    text += 'נולדתי עם תסמונת';
-                    countHappened += 1;
+                    happenedItems.push('נולדתי עם תסמונת');
                 }
 		if (document.getElementById('elseCheckboxHe').checked) {
-                    if (countHappened > 0){
-                        text += ' ו'
-                    }
-                    text += document.getElementById('elseInputHe').value;
-                    countHappened += 1;
+                    happenedItems.push(document.getElementById('elseInputHe').value);
                 }
-                text += '. ';
-
+        if (happenedItems.length > 0) {
+            if (happenedItems.length > 2) {
+                text += happenedItems.slice(0, -1).join(', ') + ' ו' + happenedItems[happenedItems.length - 1];
+            } else if (happenedItems.length === 2) {
+                text += happenedItems[0] + ' ו' + happenedItems[1];
+            } else {
+                text += happenedItems[0];
+            }
+            text += '. ';
+        }
+        let challengeItems = [];
+        let wrongWords = false;
 		if (document.getElementById('wrongWordsCheckboxHe').checked) {
                     text += ' לפעמים יוצאות לי מילים לא מתאימות';
-                //     countChal += 1;
+                    wrongWords = true;
                 }
-        if (document.getElementById('speakCheckboxHe').checked || document.getElementById('findWordsCheckboxHe').checked || 
-            document.getElementById('understandCheckboxHe').checked || document.getElementById('followCheckboxHe').checked || 
-            document.getElementById('hearCheckboxHe').checked || document.getElementById('communicateCheckboxHe').checked ||
-            document.getElementById('writeCheckboxHe').checked || document.getElementById('readCheckboxHe').checked || 
-            document.getElementById('elseDifficultCheckboxHe').checked){
-            if (document.getElementById('wrongWordsCheckboxHe').checked) {
-                text += ' ו';
-            }
-            // else{
-                // text += ' I'
-            // }
-		    text +="קשה לי ";
-		}
 		if (document.getElementById('speakCheckboxHe').checked) {
-                    text += ' לדבר';
-                    countChal += 1;
+                    challengeItems.push('לדבר');
                 }
 		if (document.getElementById('findWordsCheckboxHe').checked) {
-                    if (countChal > 0){
-                        text += ' ו'
-                    }    
-                    text += 'למצוא את המילים';
-                    countChal += 1;
+                    challengeItems.push('למצוא את המילים');
                 }
 		if (document.getElementById('understandCheckboxHe').checked) {
-                    if (countChal > 0){
-                        text += ' ו'
-                    }
-                    text += 'להבין שפה';
-                    countChal += 1;
+                    challengeItems.push('להבין שפה');
                 }
 		if (document.getElementById('followCheckboxHe').checked) {
-                   if (countChal > 0){
-                        text += ' ו'
-                    }    
-                    text += 'לעקוב אחרי השיחה';
-                    countChal += 1;
+                challengeItems.push('לעקוב אחרי השיחה');
                 }
 		if (document.getElementById('hearCheckboxHe').checked) {
-                    if (countChal > 0){
-                        text += ' ו'
-                    }
-                    text += 'לשמוע';
-                    countChal += 1;
+                    challengeItems.push('לשמוע');
                 }
 		if (document.getElementById('communicateCheckboxHe').checked) {
-                   if (countChal > 0){
-                        text += ' ו'
-                    }    
-                    text += 'לתקשר';
-                    countChal += 1;
+                challengeItems.push('לתקשר');
                 }
 		if (document.getElementById('writeCheckboxHe').checked) {
-                   if (countChal > 0){
-                        text += ' ו'
-                    }    
-                    text += 'לכתוב';
-                    countChal += 1;
+                challengeItems.push('לכתוב');
                 }
 		if (document.getElementById('readCheckboxHe').checked) {
-                   if (countChal > 0){
-                        text += ' ו'
-                    }
-                    text += 'לקרוא';
-                    countChal += 1;
+                challengeItems.push('לקרוא');
                 }
 		if (document.getElementById('elseDifficultCheckboxHe').checked) {
-                   if (countChal > 0){
-                        text += ' ו'
-                    }
-                    text += document.getElementById('elseDifficultInputHe').value;
-                    countChal += 1;
+                challengeItems.push(document.getElementById('elseDifficultInputHe').value);
+
                 }
-        text += ". אנא ";
+        if (challengeItems.length > 0) {
+            if (challengeItems.length > 2) {
+                if (wrongWords) {
+                    text += ', ';
+                }
+                text += 'קשה לי ';
+                text += challengeItems.slice(0, -1).join(', ') + ' ו' + challengeItems[challengeItems.length - 1];
+            } else if (challengeItems.length === 2) {
+                if (wrongWords) {
+                    text += ', ';
+                }
+                text += 'קשה לי ';
+                text += challengeItems[0] + ' ו' + challengeItems[1];
+            } else {
+                if (wrongWords) {
+                    text += ' ו';
+                }
+                text += 'קשה לי ';
+                text += challengeItems[0];
+            }
+            text += '. ';
+        }
+        // text += ". אנא ";
+        let helpItems = [];
+        let hasStopCheckbox = document.getElementById('stopCheckboxHe').checked;
+        if (document.getElementById('yesNoCheckboxHe').checked) {
+                helpItems.push('שאלו שאלות כן/לא, או תנו לי לבחור מבין אפשרויות');
+                }
         if (document.getElementById('patientCheckboxHe').checked) {
-                    text += 'האזרו בסבלנות ותנו לי זמן';
-                    countHelp += 1;
+                    helpItems.push('האזרו בסבלנות');
                 }
 		if (document.getElementById('slowCheckboxHe').checked) {
-                   if (countHelp > 0){
-                        text += ' ו'
-                    }    
-                    text += 'דברו לאט';
-                    countHelp += 1;
+                helpItems.push('דברו לאט');
                 }
 		if (document.getElementById('shortCheckboxHe').checked) {
-                    if (countHelp > 0){
-                        text += ' ו'
-                    }        
-                    text += 'דברו במשפטים קצרים';
-                    countHelp += 1;
-                }
-		if (document.getElementById('stopCheckboxHe').checked) {
-                   if (countHelp > 0){
-                        text += ' ו'
-                    }    
-                    text += 'עצרו לשאול אם הבנתי ותודאו שהבנתם אותי';
-                    countHelp += 1;
-                }
-		if (document.getElementById('yesNoCheckboxHe').checked) {
-                   if (countHelp > 0){
-                        text += ' ו'
-                    }
-                    text += 'שאלו שאלות כן/לא, או תנו לי לבחור מבין אפשרויות';
-                    countHelp += 1;
+                    helpItems.push('דברו במשפטים קצרים');
                 }
 		if (document.getElementById('handCheckboxHe').checked) {
-                   if (countHelp > 0){
-                        text += ' ו'
-                    }
-                    text += 'דברו עם הידיים';
-                    countHelp += 1;
+                helpItems.push('דברו עם הידיים');
                 }
 		if (document.getElementById('aidCheckboxHe').checked) {
-                   if (countHelp > 0){
-                        text += ' ו'
-                    }
-                    text += 'פנו ללוח התקשורת שלי';
-                    countHelp += 1;
+                helpItems.push('פנו ללוח התקשורת שלי');
                 }
 		if (document.getElementById('writeKeyCheckboxHe').checked) {
-                   if (countHelp > 0){
-                        text += ' ו'
-                    }    
-                    text += 'כתבו מילות מפתח';
-                    countHelp += 1;
+                helpItems.push('כתבו מילות מפתח');
                 }
 		if (document.getElementById('elseHelpCheckboxHe').checked) {
-                   if (countHelp > 0){
-                        text += ' ו'
-                    }
-                    text += document.getElementById('elseHelpInputHe').value;
-                    countHelp += 1;
+                helpItems.push(document.getElementById('elseHelpInputHe').value);
                 }
-		text += '. תודה!'
-
+		// text += '. תודה!'
+        if (helpItems.length > 0 || hasStopCheckbox) {
+            text += 'אנא ';
+            
+            if (helpItems.length > 0) {
+                if (hasStopCheckbox) {
+                    // If stop checkbox is checked, use only commas
+                    text += helpItems.join(', ');
+                    text += ', ';
+                } else {
+                    // If no stop checkbox, use 'ו' before the last item
+                    if (helpItems.length > 2) {
+                        text += helpItems.slice(0, -1).join(', ') + ' ו' + helpItems[helpItems.length - 1];
+                    } else if (helpItems.length === 2) {
+                        text += helpItems[0] + ' ו' + helpItems[1];
+                    } else {
+                        text += helpItems[0];
+                    }
+                }
+            }
+            
+            if (hasStopCheckbox) {
+                text += 'עצרו לשאול אם הבנתי וודאו שהבנתם אותי';
+            }
+            
+            text += '. ';
+        }
+        text += 'תודה!';
         document.getElementById('nextScreenTextHe').textContent = text;
         }
 
